@@ -6,16 +6,79 @@
   <script src="https://unpkg.com/react@16.13.1/umd/react.development.js"></script>
   <script src="https://unpkg.com/react-dom@16.13.1/umd/react-dom.development.js"></script>
   <script src="https://unpkg.com/@babel/standalone@7.9.3/babel.js"></script>
+  <script src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
   <script type="text/babel">
     // 🐨 Make a function called `message` which returns the JSX we want to share
+    const message = (element, className, message) => {
+      return React.createElement(
+        element,
+        {className},
+      message
+)
+    }
+    const messageAns = (props) => {
+      return <div className="message">{props.children}</div>
+    }
 
     // 🐨 use that function in place of the divs below with:
     // 💰 {message({children: 'Hello World'})} {message({children: 'Goodbye World'})}
-    const element = (
-      <div className="container">
-        <div className="message">Hello World</div>
-        <div className="message">Goodbye World</div>
-      </div>
+    // const element = (
+    //   <div className="container">
+    //     {message("div", "message", "Hello World function")}
+    //     {message("div", "message", "Goodbye World function")}
+    //   </div>
+    // )
+
+      const extraCredit1HelloElement = React.createElement(messageAns, {children: 'Hello World'})
+      const extraCredit1GoodbyeElement = React.createElement(messageAns, {children: 'Goodbye World'})
+    
+    // const element = (
+    //   <div className="container">s
+    //     {extraCredit1HelloElement}
+    //     {extraCredit1GoodbyeElement}
+    //   </div>
+    // )
+
+  // const Message = ({children}) => {
+  //   return <div className="message">{children}</div>
+  // }
+
+  // const element = (
+  //     <div className="container">
+  //       <Message>Hellllo</Message>
+  //     </div>
+  //   )
+
+  function Message({subject, greeting}) {
+    return (
+    <div className="message">
+      {greeting}, {subject}
+    </div>
+  )
+}
+
+  // const PropTypes = {
+  //   string(props, propName, componentName) {
+  //     const type = typeof props[propName]
+  //     if (type !== 'string') {
+  //       return new Error(`The ${propName} prop in ${componentName} must be a string, but was found to be a ${type}`)
+  //     }
+  //   }
+  // }
+
+  Message.propTypes = {
+  greeting: PropTypes.string.isRequired,
+  subject: PropTypes.string.isRequired
+}
+  
+
+// const hi = Message('Hello', 'World')
+const element = (
+      <>
+        <Message  subject="World" greeting="5"/>
+        <Message  subject="Worlds" greeting="Goodbye"/>
+
+      </>
     )
 
     // 💯 This is only the first step to making actual React components. The rest is in the extra credit!
